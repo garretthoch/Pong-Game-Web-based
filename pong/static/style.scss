@@ -5,5 +5,23 @@ html {background-color: black;}
 .authTitle{
     font-family: 'Bungee Inline', cursive;
     color: white;
+    margin: 10px;
+    text-align: center;
 }
 
+.auth {
+    background-color: #474747 ;
+    align-self: center;
+    width: 200px;
+    border-radius: 3px;
+    input{
+        border-color: transparent;
+    }
+
+}
+
+.auth *{
+    border-radius: 3px;
+    margin:5px;
+    text-align: center;
+}
