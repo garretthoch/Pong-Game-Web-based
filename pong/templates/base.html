@@ -6,13 +6,12 @@
 </head>
 <body>
 
-  <div class="auth flex-container">
-    <h1 class=authTitle >{{authTitle}}</h1>
-    <form>
+  <div class="auth container">
+    <h1 class="authTitle item">{{authTitle}}</h1>
+    <form class="item">
       {% block content %}
       {% endblock%}
     </form>
-    <button type="submit" value="submit">{{authTitle}}</button>
+    <button class="item" type="submit" value="submit">{{authTitle}}</button>
   </div>
-  <h1 ></h1>
 </body>

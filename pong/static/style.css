@@ -3,6 +3,20 @@ html {
   background-color: black;
 }
 
+.container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 2fr 3fr 1fr;
+      grid-template-rows: 2fr 3fr 1fr;
+  grid-gap: 10px;
+}
+
+.item {
+  background-color: pink;
+}
+
 .authTitle {
   font-family: 'Bungee Inline', cursive;
   color: white;
@@ -12,20 +26,16 @@ html {
 
 .auth {
   background-color: #474747;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  width: 200px;
+  width: auto;
   border-radius: 3px;
-}
-
-.auth input {
-  border-color: transparent;
 }
 
 .auth * {
   border-radius: 3px;
   margin: 5px;
-  text-align: center;
+}
+
+.auth * input {
+  border-color: transparent;
 }
 /*# sourceMappingURL=style.css.map */

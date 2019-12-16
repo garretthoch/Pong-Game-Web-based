@@ -2,6 +2,18 @@ html {background-color: black;}
 
 @import url('https://fonts.googleapis.com/css?family=Bungee+Inline&display=swap');
 
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 3fr 1fr;
+    grid-gap: 10px;
+    
+}
+.item{
+    background-color: pink;
+}
+
 .authTitle{
     font-family: 'Bungee Inline', cursive;
     color: white;
@@ -11,17 +23,14 @@ html {background-color: black;}
 
 .auth {
     background-color: #474747 ;
-    align-self: center;
-    width: 200px;
+    width: auto;
     border-radius: 3px;
+}
+
+.auth * {
+    border-radius: 3px;
+    margin:5px;
     input{
         border-color: transparent;
     }
-
-}
-
-.auth *{
-    border-radius: 3px;
-    margin:5px;
-    text-align: center;
 }
