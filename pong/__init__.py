@@ -1,6 +1,9 @@
 import os
 
 from flask import Flask
+from flask import (
+    Blueprint, flash, g, redirect, render_template, request, session, url_for
+)
 
 from pong.auth import auth
 
@@ -13,7 +16,7 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/')
     def index():
-        return 'Hello, World!'
+        return render_template('index.html')
 
     app.register_blueprint(auth)
 
