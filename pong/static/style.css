@@ -6,15 +6,18 @@ html {
 .container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
-  -ms-grid-rows: 2fr 3fr 1fr;
-      grid-template-rows: 2fr 3fr 1fr;
+  -ms-grid-columns: 3fr 1fr 3fr;
+      grid-template-columns: 3fr 1fr 3fr;
+  -ms-grid-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 10px;
 }
 
 .item {
-  background-color: pink;
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  -ms-grid-row: 2;
+      grid-row-start: 2;
 }
 
 .authTitle {
@@ -32,10 +35,16 @@ html {
 
 .auth * {
   border-radius: 3px;
-  margin: 5px;
+  margin: 3px;
+  text-align: center;
 }
 
 .auth * input {
+  border-color: transparent;
+}
+
+.auth * button {
+  margin: 10px;
   border-color: transparent;
 }
 /*# sourceMappingURL=style.css.map */
