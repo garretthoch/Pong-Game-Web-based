@@ -8,6 +8,31 @@ html {
   font-family: 'Bungee Inline', cursive;
 }
 
+.navbar button {
+  border-color: white;
+  background-color: transparent;
+  color: white;
+  border-radius: 3px;
+  font-family: 'Bungee Inline', cursive;
+}
+
+.account a {
+  border-color: white;
+  border-style: solid;
+  background-color: transparent;
+  color: white;
+  border-radius: 3px;
+  font-family: 'Bungee Inline', cursive;
+  text-decoration: none;
+}
+
+.gameArea {
+  border-color: white;
+  color: white;
+  border-style: solid;
+  border-width: thick;
+}
+
 .container {
   display: -ms-grid;
   display: grid;
@@ -16,6 +41,7 @@ html {
   -ms-grid-rows: 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 10px;
+  justify-items: center;
 }
 
 .item {
