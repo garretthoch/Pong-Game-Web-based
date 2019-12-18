@@ -9,16 +9,16 @@
         <h1 class ="header">Welcome to Pong</h1>
     </div>
     <div class="navbar">
-        <button  class="navBarButton" type="button">Play</button >
-        <button class="navBarButton" type="button">Scoreboard</button>
-        <button class="navBarButton" type="button">My Account</button>
+        <div class="navbaritem">
+            <button  class="navBarButton" type="button">Play</button >
+            <button class="navBarButton" type="button">Scoreboard</button>
+            <button class="navBarButton" type="button">My Account</button>
+        </div>
+        
     </div>
-    <div class="gameArea">
-        <p>Test</p>
-    </div>
-    <div class="account">
-        <a href="login">Login</a>
-        <a href="register">Register</a>
+    <div class="gameArea container">
+        {% block content %}
+        {% endblock%}
     </div>
   
 </body>

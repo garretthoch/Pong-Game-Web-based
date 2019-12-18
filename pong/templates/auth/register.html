@@ -1,6 +1,9 @@
-{% extends "auth/base.html" %}
+{% extends "index.html" %}
 
 {% block content %}
+    <div class="auth item">
+      <form >
+        <h1 class="authTitle">{{authTitle}}</h1>
         <div>
             <input type="text" name="emailaddress" placeholder="email address" >
         </div>
@@ -13,4 +16,7 @@
         <div>
             <input type="password" name="password" placeholder="confirm password" >
         </div>
+      </form>
+      <div><button  type="submit" value="submit">{{authTitle}}</button></div>
+    </div>
 {% endblock %}

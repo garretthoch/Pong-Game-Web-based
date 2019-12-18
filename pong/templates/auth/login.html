@@ -1,10 +1,17 @@
-{% extends "auth/base.html" %}
+{% extends "index.html" %}
+
 
 {% block content %}
-    <div>
-        <input type="text" name="username" placeholder="Username" >
-    </div>
-    <div>
-        <input type="password" name="password" placeholder="Password" >
+    <div class="auth item">
+      <form >
+        <h1 class="authTitle">{{authTitle}}</h1>
+        <div>
+            <input type="text" name="username" placeholder="Username" >
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Password" >
+        </div>
+      </form>
+      <div><button  type="submit" value="submit">{{authTitle}}</button></div>
     </div>
 {% endblock %}
