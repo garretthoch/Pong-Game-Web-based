@@ -2,9 +2,11 @@ html {background-color: black;}
 
 @import url('https://fonts.googleapis.com/css?family=Bungee+Inline&display=swap');
 
+$font: 'Bungee Inline', cursive;
+
 .header{
     color: white;
-    font-family: 'Bungee Inline', cursive;
+    font-family: $font;
     text-align: center;
 }
 
@@ -27,7 +29,7 @@ html {background-color: black;}
     background-color: transparent;
     color: white;
     border-radius: 3px;
-    font-family: 'Bungee Inline', cursive;
+    font-family: $font;
     text-align: center;
     margin-right: 50px;
     margin-left: 50px;
@@ -42,7 +44,7 @@ html {background-color: black;}
     background-color: transparent;
     color: white;
     border-radius: 3px;
-    font-family: 'Bungee Inline', cursive;
+    font-family: $font;
     text-decoration: none;
 }
 
@@ -60,7 +62,7 @@ html {background-color: black;}
 
 .container{
     display: grid;
-    grid-template-columns: 3fr 1fr 3fr;
+    grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 10px;
     justify-items: center;
@@ -72,7 +74,7 @@ html {background-color: black;}
 }
 
 .authTitle{
-    font-family: 'Bungee Inline', cursive;
+    font-family: $font;
     color: white;
     margin: 10px;
     text-align: center;
@@ -94,5 +96,29 @@ html {background-color: black;}
     button{
         margin: 10px;
         border-color: transparent;
+        background-color: white;
+        font-weight: bold;
+        color: black;
     }
+}
+
+.authbtn{
+    border-color: white;
+    background-color: transparent;
+    color:white;
+    border-radius: 3px;
+    font-family: $font;
+    text-align: center;
+    width: 150px;
+    margin: 10px 50px 10px 50px;
+
+
+}
+
+h2{
+    font-family: $font;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
 }
