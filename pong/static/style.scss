@@ -38,6 +38,11 @@ $font: 'Bungee Inline', cursive;
 
 }
 
+.navBarButton:hover{
+    background-color: white;
+    color: black;
+}
+
 .account a{
     border-color: white;
     border-style: solid;
@@ -111,8 +116,14 @@ $font: 'Bungee Inline', cursive;
     text-align: center;
     width: 150px;
     margin: 10px 50px 10px 50px;
+    
 
 
+}
+
+.authbtn:hover{
+    background-color: white;
+    color: black;
 }
 
 h2{
@@ -121,4 +132,21 @@ h2{
     margin: 0;
     padding: 0;
     line-height: 1;
+}
+
+a{
+    display: inline-block;
+    border-style: solid;
+    border-radius: 3px;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    width: 150px;
+    margin: 10px 50px 10px 50px;
+    font-family: $font;
+    text-align: center;
+}
+a:hover{
+    background-color: white;
+    color: black;
 }
