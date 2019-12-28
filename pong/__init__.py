@@ -6,6 +6,7 @@ from flask import (
 )
 
 from pong.auth import auth
+from pong.game import game
 
 def create_app(test_config=None):
     # create and configure the app
@@ -19,5 +20,6 @@ def create_app(test_config=None):
         return render_template('auth/default.html')
 
     app.register_blueprint(auth)
+    app.register_blueprint(game)
 
     return app
