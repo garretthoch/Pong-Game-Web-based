@@ -1,21 +1,32 @@
 var canvas = {width:500, height:300}
 
-function draw(){
-    var c = document.getElementById("pong")
-    var ctx = c.getContext("2d")
-    ctx.fillRect(0,0,20,60)
+var c = document.getElementById("pong")
+var ctx = c.getContext("2d")
+var x =0;
+var y =0;
+var wid = 20;
+var hei=20;
+
+
+function drawPaddle(x,y,wid,hei){
+    ctx.fillStyle='black'
+    ctx.fillRect(x,y,wid,hei)
+
 }
 
+drawPaddle(x,y,wid,height)
+
 function move(){
-    if(UP){
-        //Logic here
+    if(UP && y>0){
+        y=y-5
     }
-    if(down){
-        //logic here
+    if(down && y<canvas.height){
+        y=y+5
     }
 }
 var up = false;
 var down = false;
+
 document.onkeydown = function(e) {
     if (e.keycode == 38){ //upkey
         up=true;
@@ -35,14 +46,13 @@ function clearcanvas(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
 }
 
-function paddle(x,y){
-    //redraw rectangle here
-
-}
 
 setInterval(update,10)
 
 function update(){
-    //logic here that calls clear canvas and paddle
+    clearcanvas();
+    drawPaddle();
+    move();
+    
 }
 // look here https://stackoverflow.com/questions/39806858/how-to-use-arrow-keys-to-move-object-smoothly-in-canvas

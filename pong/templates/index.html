@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
   <script src="{{ url_for('static', filename='js/draw.js') }}"></script>
 </head>
-<body onload="draw()">
+<body>
     
     <div>
         <h1 class ="header">Welcome to Pong</h1>
@@ -19,7 +19,6 @@
         </div>
         
     </div>
-    <div class="gameArea container">
         {% block content %}
         {% endblock%}
     </div>
