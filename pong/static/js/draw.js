@@ -1,9 +1,8 @@
-var canvas = {width:500, height:300}
-
-var c = document.getElementById("pong")
-var ctx = c.getContext("2d")
-var x =0;
-var y =0;
+var canvas = {width:500, height:300};
+var c = document.getElementById("pong");
+var ctx = c.getContext("2d");
+var x =40;
+var y =40;
 var wid = 20;
 var hei=20;
 
@@ -14,10 +13,11 @@ function drawPaddle(x,y,wid,hei){
 
 }
 
-drawPaddle(x,y,wid,height)
+drawPaddle(x,y,wid,hei)
 
 function move(){
-    if(UP && y>0){
+    
+    if(up && y>0){
         y=y-5
     }
     if(down && y<canvas.height){
@@ -27,15 +27,17 @@ function move(){
 var up = false;
 var down = false;
 
-document.onkeydown = function(e) {
-    if (e.keycode == 38){ //upkey
+window.onkeydown = function(e) {
+    var keyPr = e.code;
+    console.log(keyPr)
+    if (e.code == "ArrowUp"){ //upkey
         up=true;
     }
-    if (e.keycode == 40) {//downkey
+    if (e.code == "ArrowDown") {//downkey
         down=true;
     }
 }
-document.onkeyup = function(e) {
+window.onkeyup = function(e) {
     if (e.keycode == 38) //upkey
         up=false;
     if (e.keycode == 40) //downkey
@@ -46,13 +48,14 @@ function clearcanvas(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
 }
 
-
 setInterval(update,10)
+
 
 function update(){
     clearcanvas();
-    drawPaddle();
+    drawPaddle(x,y,wid,hei);
     move();
     
 }
 // look here https://stackoverflow.com/questions/39806858/how-to-use-arrow-keys-to-move-object-smoothly-in-canvas
+//https://codepen.io/svsdesigns/pen/pvmjPG
