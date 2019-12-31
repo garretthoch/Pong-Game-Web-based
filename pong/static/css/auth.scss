@@ -1,47 +1,10 @@
-html {background-color: black;}
+
 
 @import url('https://fonts.googleapis.com/css?family=Bungee+Inline&display=swap');
 
 $font: 'Bungee Inline', cursive;
-
-.header{
-    color: white;
-    font-family: $font;
-    text-align: center;
-}
-
-
-.navbar{
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 1fr;
-    grid-gap: 10px;
-    justify-items: center;
-    align-self: center;
-
-    grid-template-areas: ". btn  .";
-}
-.navbaritem{
-    grid-area: btn;
-}
-.navbar button{
-    border-color: white;
-    background-color: transparent;
-    color: white;
-    border-radius: 3px;
-    font-family: $font;
-    text-align: center;
-    margin-right: 50px;
-    margin-left: 50px;
-    width: 150px
-
-
-}
-
-.navBarButton:hover{
-    background-color: white;
-    color: black;
-}
+$gameHeight: 500;
+$gameWidth: 800;
 
 .account a{
     border-color: white;
@@ -61,6 +24,8 @@ $font: 'Bungee Inline', cursive;
     margin-top: 50px;
     margin-left: 300px;
     margin-right: 300px;
+    height: $gameHeight;
+    width: $gameWidth;
 }
 
 
@@ -70,6 +35,8 @@ $font: 'Bungee Inline', cursive;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 10px;
     justify-items: center;
+    width: $gameWidth;
+    height: $gameHeight;
     
 }
 .item{
@@ -133,19 +100,4 @@ h2{
     line-height: 1;
 }
 
-a{
-    display: inline-block;
-    border-style: solid;
-    border-radius: 3px;
-    background-color: transparent;
-    color: white;
-    text-decoration: none;
-    width: 150px;
-    margin: 10px 50px 10px 50px;
-    font-family: $font;
-    text-align: center;
-}
-a:hover{
-    background-color: white;
-    color: black;
-}
+

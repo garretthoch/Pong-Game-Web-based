@@ -2,8 +2,9 @@
 
 <head >
   <title>Play Pong!</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+  {% block stylesheets%}
+  {%endblock%}
+  
   
 </head>
 <body>
@@ -22,6 +23,8 @@
         {% block content %}
         {% endblock%}
     </div>
-    <script src="{{ url_for('static', filename='js/draw.js') }}"></script>
+    {%block scripts%}
+    {%endblock%}
+    
     
 </body>

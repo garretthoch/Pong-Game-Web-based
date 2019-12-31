@@ -3,49 +3,6 @@ html {
   background-color: black;
 }
 
-.header {
-  color: white;
-  font-family: "Bungee Inline", cursive;
-  text-align: center;
-}
-
-.navbar {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 3fr 1fr;
-      grid-template-columns: 1fr 3fr 1fr;
-  -ms-grid-rows: 1fr;
-      grid-template-rows: 1fr;
-  grid-gap: 10px;
-  justify-items: center;
-  -ms-grid-row-align: center;
-      align-self: center;
-      grid-template-areas: ". btn  .";
-}
-
-.navbaritem {
-  -ms-grid-row: 1;
-  -ms-grid-column: 2;
-  grid-area: btn;
-}
-
-.navbar button {
-  border-color: white;
-  background-color: transparent;
-  color: white;
-  border-radius: 3px;
-  font-family: "Bungee Inline", cursive;
-  text-align: center;
-  margin-right: 50px;
-  margin-left: 50px;
-  width: 150px;
-}
-
-.navBarButton:hover {
-  background-color: white;
-  color: black;
-}
-
 .account a {
   border-color: white;
   border-style: solid;
@@ -64,6 +21,8 @@ html {
   margin-top: 50px;
   margin-left: 300px;
   margin-right: 300px;
+  height: 500;
+  width: 800;
 }
 
 .container {
@@ -75,6 +34,8 @@ html {
       grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 10px;
   justify-items: center;
+  width: 800;
+  height: 500;
 }
 
 .item {

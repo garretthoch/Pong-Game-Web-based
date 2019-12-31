@@ -1,6 +1,16 @@
 #pong {
   background-color: pink;
+}
+
+.gameArea {
+  border-color: white;
+  color: white;
+  border-style: solid;
+  border-width: thick;
+  margin-top: 50px;
+  margin-left: 300px;
+  margin-right: 300px;
+  height: 500;
   width: 800;
-  height: 300;
 }
 /*# sourceMappingURL=game.css.map */

@@ -1,5 +1,11 @@
 {% extends "index.html" %}
 
+{% block stylesheets%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+{%endblock%}
+
+
 {% block content %}
     <div class="gameArea container">
         <div class="item">
