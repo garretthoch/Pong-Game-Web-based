@@ -12,6 +12,6 @@ from . import main
 def play():
     return render_template('game/default.html')
 
-@socketio.on('paddle_move')
-def paddle_move(json):
-    print('message' + str(json))
+@socketio.on('test')
+def connect(json):
+    emit('response', json['test'])

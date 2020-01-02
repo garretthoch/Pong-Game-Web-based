@@ -52,8 +52,22 @@ function clearcanvas(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
 }
 
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+    socket.on('connect', () =>{
+        socket.emit('test', {'test':"helloworld"});
+    });
+
+    socket.on('response', message =>{
+        document.querySelector('.test').innerHTML= message;
+    })
+
+    requestAnimationFrame(update);
+});
+
 //setInterval(update,10)
-requestAnimationFrame(update);
+
 
 function update(){
     clearcanvas();

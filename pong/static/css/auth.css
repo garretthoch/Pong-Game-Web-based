@@ -1,8 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Bungee+Inline&display=swap");
-html {
-  background-color: black;
-}
-
 .account a {
   border-color: white;
   border-style: solid;
@@ -98,23 +94,5 @@ h2 {
   margin: 0;
   padding: 0;
   line-height: 1;
-}
-
-a {
-  display: inline-block;
-  border-style: solid;
-  border-radius: 3px;
-  background-color: transparent;
-  color: white;
-  text-decoration: none;
-  width: 150px;
-  margin: 10px 50px 10px 50px;
-  font-family: "Bungee Inline", cursive;
-  text-align: center;
-}
-
-a:hover {
-  background-color: white;
-  color: black;
 }
 /*# sourceMappingURL=auth.css.map */
