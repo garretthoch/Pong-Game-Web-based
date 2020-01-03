@@ -74,7 +74,6 @@ function update(){
     clearcanvas();
     drawPaddle(x,y,wid,hei);
     move();
-
     requestAnimationFrame(update);
     
 }
