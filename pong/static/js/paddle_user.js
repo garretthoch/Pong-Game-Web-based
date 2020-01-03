@@ -48,14 +48,14 @@ window.onkeyup = function(e) {
 }
 
 function clearcanvas(){
-    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 }
 
 
 
 var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 socket.on('connect', () =>{
-    socket.emit('test', {'test':"helloworld"});
+    socket.emit('startconditions', {'height':canvas.height, 'width':canvas.width});
 });
 
 socket.on('response', message =>{
@@ -64,6 +64,10 @@ socket.on('response', message =>{
 
 socket.on('update', message =>{
     document.querySelector('.test').innerHTML= message;
+})
+
+socket.on('moveball', message =>{
+    drawball(message[xball],message[yball],length)
 })
 requestAnimationFrame(update);
 
@@ -74,6 +78,7 @@ function update(){
     clearcanvas();
     drawPaddle(x,y,wid,hei);
     move();
+    socket.emit('updateball')
     requestAnimationFrame(update);
     
 }
