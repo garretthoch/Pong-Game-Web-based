@@ -15,3 +15,7 @@ def play():
 @socketio.on('test')
 def connect(json):
     emit('response', json['test'])
+
+@socketio.on('move', )
+def move(json):
+    emit('update', json['y'])

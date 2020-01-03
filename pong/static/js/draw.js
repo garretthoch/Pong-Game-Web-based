@@ -25,13 +25,13 @@ function move(){
     if(down && y<canvas.height-hei){
         y=y+5
     }
+    socket.emit('move', {'y':y})
 }
 var up = false;
 var down = false;
 
 window.onkeydown = function(e) {
     var keyPr = e.code;
-    console.log(keyPr)
     if (e.code == "ArrowUp"){ //upkey
         up=true;
     }
@@ -41,7 +41,6 @@ window.onkeydown = function(e) {
 }
 window.onkeyup = function(e) {
     var keyPr = e.code;
-    console.log(keyPr)
     if (e.code == "ArrowUp") //upkey
         up=false;
     if (e.code == "ArrowDown") //downkey
@@ -53,18 +52,20 @@ function clearcanvas(){
 }
 
 
-document.addEventListener('DOMContentLoaded', ()=>{
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
-    socket.on('connect', () =>{
-        socket.emit('test', {'test':"helloworld"});
-    });
 
-    socket.on('response', message =>{
-        document.querySelector('.test').innerHTML= message;
-    })
-
-    requestAnimationFrame(update);
+var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+socket.on('connect', () =>{
+    socket.emit('test', {'test':"helloworld"});
 });
+
+socket.on('response', message =>{
+    document.querySelector('.test').innerHTML= message;
+})
+
+socket.on('update', message =>{
+    document.querySelector('.test').innerHTML= message;
+})
+requestAnimationFrame(update);
 
 //setInterval(update,10)
 
@@ -73,6 +74,7 @@ function update(){
     clearcanvas();
     drawPaddle(x,y,wid,hei);
     move();
+
     requestAnimationFrame(update);
     
 }
