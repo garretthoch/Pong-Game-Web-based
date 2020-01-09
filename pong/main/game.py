@@ -22,9 +22,7 @@ pong = Pong()
 def play():
     return render_template('game/default.html')
 
-@socketio.on('test')
-def connect(json):
-    emit('response', json['test'])
+
 
 
 @socketio.on('moveup')
@@ -37,7 +35,13 @@ def movedown(json):
 
 @socketio.on('startgame')
 def startgame(message):
-    pong.startgame()
+    height= message['height']
+    width=message['width']
+    pong.startgame(height,width)
+
+@socketio.on('updateball')
+def updateball():
+    emit({'x':pong.xball, 'y':pong.yball})
 
 
 

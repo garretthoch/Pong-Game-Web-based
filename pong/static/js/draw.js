@@ -77,7 +77,6 @@ socket.on('response', message =>{
 socket.on('moveball',message =>{
     xball=message['x']
     yball=message['y']
-    lball=message['l']
     console.log("ball moved")
 })
 
@@ -86,7 +85,7 @@ socket.on('moveball',message =>{
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('start').onclick=function(){
-        socket.emit('startgame',{'gameh':canvas.height,'gamew':canvas.width});
+        socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
         requestAnimationFrame(update);
     };
     
@@ -99,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function update(){
     clearcanvas();
+    socket.emit('updateball')
     drawPaddle(x,y,wid,hei);
     move();
     drawball(xball,yball,lball)
