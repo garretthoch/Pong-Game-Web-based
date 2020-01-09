@@ -41,7 +41,7 @@ def startgame(message):
 
 @socketio.on('updateball')
 def updateball():
-    emit({'x':pong.xball, 'y':pong.yball})
+    emit('moveball',{'x':pong.xball, 'y':pong.yball})
 
 
 
