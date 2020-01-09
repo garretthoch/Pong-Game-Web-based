@@ -7,9 +7,13 @@ from .. import socketio
 
 from . import main
 
-from . import Pong
+from .PongGame import Pong
 
 import time
+
+
+
+
 
 pong = Pong()   
 
