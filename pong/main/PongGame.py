@@ -8,6 +8,8 @@ class Pong:
         self.yball=0
         self.xball=0
         self.gameRunning=False
+        self.paddleLenght = 75
+        self.paddleWidth = 15
 
     def updateplayerpos(self,player,y):
         self.playerpos[player]=y

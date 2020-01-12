@@ -23,10 +23,6 @@ def play():
     return render_template('game/default.html')
 
 
-
-
-
-
 @socketio.on('startgame')
 def startgame(message):
     #emit('response', "Running...")
@@ -47,4 +43,12 @@ def updateball():
 @socketio.on('playerMove')
 def updatePlayer(message):
     pong.updateplayerpos('player1',message)
+
+@socketio.on('setup')
+def setup(message):
+    height= message['height']
+    width=message['width']
+    pdict = {'width':pong.paddleWidth, 'Length':pong.paddleLenght,'x':10, 'y':height/2-pong.paddleLenght/2}
+    bdict = {'Length':pong.ballLen, 'x':width/2, 'y':height/2}
+    emit('parameters', {'paddle':pdict, 'ball':bdict})
 
