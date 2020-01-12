@@ -7,22 +7,22 @@ var x =0;
 var y =0;
 var wid = 15;
 var hei=75;
-var xball = canvas.width/2
-var yball = canvas.height/2
+var xball = canvas.width/2;
+var yball = canvas.height/2;
 var lball = 10;
 
-var start = true
+var start = true;
 
 
 function drawPaddle(x,y,wid,hei){
-    ctx.fillStyle='black'
-    ctx.fillRect(x,y,wid,hei)
+    ctx.fillStyle='black';
+    ctx.fillRect(x,y,wid,hei);
 
 }
 
 function drawball(x,y,len){
-    ctx.fillStyle='black'
-    ctx.fillRect(x,y,len,len)
+    ctx.fillStyle='black';
+    ctx.fillRect(x,y,len,len);
 
 }
 
@@ -31,13 +31,12 @@ drawPaddle(x,y,wid,hei)
 function move(){
     
     if(up && y>0){
-        y=y-5
-        socket.emit('moveup', {'direction':"Move up"});
+        y=y-5;
     }
     if(down && y<canvas.height-hei){
-        y=y+5
-        socket.emit('movedown', {'direction':"Move Down"});
+        y=y+5;
     }
+    
 }
 var up = false;
 var down = false;
@@ -64,7 +63,6 @@ function clearcanvas(){
 }
 
 
-
 var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 socket.on('connect', () =>{
     socket.emit('test', {'test':"helloworld"});
@@ -75,9 +73,8 @@ socket.on('response', message =>{
 });
 
 socket.on('moveball',message =>{
-    xball=message['x']
-    yball=message['y']
-    console.log("ball moved")
+    xball=message['x'];
+    yball=message['y'];
 })
 
 
@@ -98,12 +95,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function update(){
     clearcanvas();
-    socket.emit('updateball')
+    socket.emit('updateball');
+    socket.emit('playerMove', y);
     drawPaddle(x,y,wid,hei);
     move();
-    drawball(xball,yball,lball)
+    drawball(xball,yball,lball);
     requestAnimationFrame(update);
     
 }
-// look here https://stackoverflow.com/questions/39806858/how-to-use-arrow-keys-to-move-object-smoothly-in-canvas
-//https://codepen.io/svsdesigns/pen/pvmjPG
