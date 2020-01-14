@@ -48,7 +48,8 @@ def updatePlayer(message):
 def setup(message):
     height= message['height']
     width=message['width']
-    pdict = {'width':pong.paddleWidth, 'Length':pong.paddleLenght,'x':10, 'y':height/2-pong.paddleLenght/2}
+    p1dict = {'width':pong.paddleWidth, 'Length':pong.paddleLenght,'x':10, 'y':height/2-pong.paddleLenght/2}
+    p2dict = {'width':pong.paddleWidth, 'Length':pong.paddleLenght,'x':width-10-pong.paddleWidth, 'y':height/2-pong.paddleLenght/2}
     bdict = {'Length':pong.ballLen, 'x':width/2, 'y':height/2}
-    emit('parameters', {'paddle':pdict, 'ball':bdict})
+    emit('parameters', {'paddle1':p1dict, 'paddle2':p2dict,'ball':bdict})
 
