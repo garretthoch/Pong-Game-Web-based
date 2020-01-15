@@ -1,13 +1,8 @@
 const h = document.getElementById("pong").clientHeight;
 const w = document.getElementById("pong").clientWidth;
 var canvas = {width:w, height:h};
-var y =0;
-
 var c = document.getElementById("pong");
 var ctx = c.getContext("2d");
-
-ctx.fillStyle='black';
-ctx.fillRect(0,0,15,75);
 
 
 const p1 = {
@@ -18,13 +13,12 @@ const p1 = {
     draw: function(ctx){
         ctx.fillStyle='black';
         ctx.fillRect(this.x,this.y,this.width,this.height);
-
     },
     initialize: function(param){
-        this.width=param['width']
-        this.length=param['length']
-        this.x =param['x']
-        this.y =param['y']
+        this.width=param['width'];
+        this.length=param['length'];
+        this.x =param['x'];
+        this.y =param['y'];
         
     }
 
@@ -41,10 +35,10 @@ const p2 = {
 
     },
     initialize: function(param){
-        this.width=param['width']
-        this.length=param['length']
-        this.x =param['x']
-        this.y =param['y']
+        this.width=param['width'];
+        this.length=param['length'];
+        this.x =param['x'];
+        this.y =param['y'];
         
     }
 
@@ -57,36 +51,45 @@ const ball = {
     draw: function(ctx){
         ctx.fillStyle='black';
         ctx.fillRect(this.x,this.y,this.length,this.length);
+        console.log("draw ball");   
 
     },
     initialize: function(param){
-        this.length=param['length']
-        this.x =param['x']
-        this.y =param['y']
+        this.length=param['length'];
+        this.x =param['x'];
+        this.y =param['y'];
         
     }
 
 };
 
+ball.x = 100;
+ball.y = 100;
+ball.length=10;
 
 
-var start = true;
+p1.x=10;
+p1.y=10;
+p1.height = 75;
+p1.width = 15;
 
 
-
-
-
-
+p2.width = 15;
+p2.x=canvas.width-10-p2.width;
+p2.y=125;
+p2.height = 75;  
 
 function move(){
-    
+    var y = p1.y
     if(up && y>0){
         y=y-5;
     }
-    if(down && y<canvas.height-p1.length){
+    if(down && y<canvas.height-p1.height){
         y=y+5;
     }
+    p1.y=y
     p1.draw(ctx)
+    p2.y = p1.y;
     p2.draw(ctx)
     
     
@@ -115,18 +118,21 @@ window.onkeyup = function(e) {
 
 
 
+
 var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 socket.on('connect', () =>{
     socket.emit('setup',{'height':canvas.height,'width':canvas.width});
 });
 
+/*
 socket.on('parameters',message =>{
-    var p= message['paddle1']
-    p1.initialize(p)
-    p= message['paddle2']
-    p2.initialize(p)
-    p= message['ball']
-    ball.initialize(p)
+    console.log("parameters");
+    var p= message['paddle1'];
+    p1.initialize(p);
+    p= message['paddle2'];
+    p2.initialize(p);
+    p= message['ball'];
+    ball.initialize(p);
 });
 
 socket.on('response', message =>{
@@ -140,12 +146,12 @@ socket.on('moveball',message =>{
 })
 
 
-
+*/
 
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('start').onclick=function(){
-        socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
+        //socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
         requestAnimationFrame(update);
     };
 });
@@ -158,10 +164,8 @@ function clearcanvas(){
 
 function update(){
     clearcanvas();
-    socket.emit('updateball');
-    socket.emit('playerMove', y);
-    p1.draw(ctx)
-    p2.draw(ctx)
+    //socket.emit('updateball');
+    //socket.emit('playerMove', y);
     move();
     ball.draw(ctx)
     requestAnimationFrame(update);
