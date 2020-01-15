@@ -8,7 +8,7 @@ class Pong:
         self.yball=0
         self.xball=0
         self.gameRunning=False
-        self.paddleLenght = 75
+        self.paddleLength = 75
         self.paddleWidth = 15
 
     def updateplayerpos(self,player,y):
@@ -17,8 +17,8 @@ class Pong:
     def startgame(self,height,width):
         xdir = 1
         ydir = 1
-        self.xball = width/2
-        self.yball = height/2
+        self.xball = round(width/2)
+        self.yball = round(height/2)
         xspeed =4
         yspeed =4
         maxspeed = 4

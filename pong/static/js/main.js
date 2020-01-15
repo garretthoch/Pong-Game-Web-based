@@ -4,12 +4,12 @@ var canvas = {width:w, height:h};
 var c = document.getElementById("pong");
 var ctx = c.getContext("2d");
 
-
+// Define player 1 object 
 const p1 = {
     x: 0,
     y: 0,
-    height: 0,
-    width: 0,
+    height: 75,
+    width: 15,
     draw: function(ctx){
         ctx.fillStyle='black';
         ctx.fillRect(this.x,this.y,this.width,this.height);
@@ -24,11 +24,13 @@ const p1 = {
 
 };
 
+
+// Define player 2 object 
 const p2 = {
     x: 0,
     y: 0,
-    height: 0,
-    width: 0,
+    height: 75,
+    width: 15,
     draw: function(ctx){
         ctx.fillStyle='black';
         ctx.fillRect(this.x,this.y,this.width,this.height);
@@ -44,14 +46,14 @@ const p2 = {
 
 };
 
+// Define ball object 
 const ball = {
     x: 0,
     y: 0,
     length: 0,
     draw: function(ctx){
         ctx.fillStyle='black';
-        ctx.fillRect(this.x,this.y,this.length,this.length);
-        console.log("draw ball");   
+        ctx.fillRect(this.x,this.y,this.length,this.length);   
 
     },
     initialize: function(param){
@@ -63,21 +65,6 @@ const ball = {
 
 };
 
-ball.x = 100;
-ball.y = 100;
-ball.length=10;
-
-
-p1.x=10;
-p1.y=10;
-p1.height = 75;
-p1.width = 15;
-
-
-p2.width = 15;
-p2.x=canvas.width-10-p2.width;
-p2.y=125;
-p2.height = 75;  
 
 function move(){
     var y = p1.y
@@ -116,17 +103,13 @@ window.onkeyup = function(e) {
 }
 
 
-
-
-
 var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 socket.on('connect', () =>{
     socket.emit('setup',{'height':canvas.height,'width':canvas.width});
 });
 
-/*
+
 socket.on('parameters',message =>{
-    console.log("parameters");
     var p= message['paddle1'];
     p1.initialize(p);
     p= message['paddle2'];
@@ -146,12 +129,12 @@ socket.on('moveball',message =>{
 })
 
 
-*/
+
 
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('start').onclick=function(){
-        //socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
+        socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
         requestAnimationFrame(update);
     };
 });
@@ -164,8 +147,8 @@ function clearcanvas(){
 
 function update(){
     clearcanvas();
-    //socket.emit('updateball');
-    //socket.emit('playerMove', y);
+    socket.emit('updateball');
+    socket.emit('playerMove', p1.y);
     move();
     ball.draw(ctx)
     requestAnimationFrame(update);
