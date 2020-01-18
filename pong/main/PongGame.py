@@ -10,6 +10,7 @@ class Pong:
         self.gameRunning=False
         self.paddleLength = 75
         self.paddleWidth = 15
+        self.paddleoffset= 10
 
     def updateplayerpos(self,player,y):
         self.playerpos[player]=y
@@ -21,34 +22,25 @@ class Pong:
         self.yball = round(height/2)
         xspeed =4
         yspeed =4
-        maxspeed = 4
-        minspeed = 1
         ballL=10
-        paddleWidth = 15
-        paddleLength= 75
         self.gameRunning=True
-        ptop = paddleLength/3
-        pmiddle= 2*paddleLength/3
-        pbottom= paddleLength
+        
 
-        while(True):
-            if self.xball >= (width-ballL): #ball hit right side of game area
-                xdir =-1
-            if (self.xball < paddleWidth):
-                if(self.playerpos['player1']<= self.yball <= self.playerpos['player1']+paddleLength):#ball hit paddle
-                    #determine where the ball hit the paddle and adjust the speeds as necessary
-                    #top third add speed in the y direction
-                    #bottom third add speed in the -y direciton
-                    #center no change
-                    #logic needs to be fixed here is a source
-                    #https://gamedev.stackexchange.com/questions/4253/in-pong-how-do-you-calculate-the-balls-direction-when-it-bounces-off-the-paddl
-                    if (0<=(self.yball-self.playerpos['player1'])<=ptop ): #if top third 
-                        ydir = -1
-                    elif (pmiddle<=(self.yball-self.playerpos['player1'])<=pbottom) : #if bottom third
-                        ydir = 1
-      
+        while(self.gameRunning):
+            if self.xball > (width-ballL-self.paddleWidth-self.paddleoffset): #ball at right paddle
+                if(self.playerpos['player2']<= self.yball <= self.playerpos['player2']+self.paddleLength):#ball hit paddle on left side
+                    ydir =paddlePhysics(self.yball,self.playerpos['player2'] ,ydir)
+                    xdir =-1
+                else:#paddle missed ball
+                    self.gameRunning=False
+                    break
+
+            if (self.xball < self.paddleWidth+self.paddleoffset): #ball at left paddle
+                if(self.playerpos['player1']<= self.yball <= self.playerpos['player1']+self.paddleLength):#ball hit paddle on right side
+                    ydir =paddlePhysics(self.yball,self.playerpos['player1'] ,ydir)
                     xdir =1
-                else:
+                else: #paddle missed ball
+                    self.gameRunning=False
                     break
 
             if self.yball >= (height-ballL): #ball hit bottom of game area
@@ -62,6 +54,25 @@ class Pong:
             self.xball = self.xball + (xdir*xspeed)
             self.yball = self.yball + (ydir*yspeed)
             time.sleep(1/60)
-        self.gameRunning=False
+        
+
+        def paddlePhysics(self,yball, ypaddle,ydir):
+            #determine where the ball hit the paddle and adjust the speeds as necessary
+            #top third add speed in the y direction
+            #bottom third add speed in the -y direciton
+            #center no change
+            #logic needs to be fixed here is a source
+            #https://gamedev.stackexchange.com/questions/4253/in-pong-how-do-you-calculate-the-balls-direction-when-it-bounces-off-the-paddl
+            ptop = self.paddleLength/3
+            pmiddle= 2*self.paddleLength/3
+            pbottom= self.paddleLength
+            if (0 <= yball-ypaddle<=ptop): # top thrid
+                ydir = -1
+            elif (ptop<=(yball-ypaddle)<=pmiddle): # middle third
+                ydir = ydir
+            elif (pmiddle<=(yball-ypaddle)<=pbottom) : #if bottom third
+                ydir = 1
+            return ydir
+            
 
 

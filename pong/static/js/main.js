@@ -67,39 +67,58 @@ const ball = {
 
 
 function move(){
-    var y = p1.y
-    if(up && y>0){
-        y=y-5;
+    if ( p1.y>0 && p1up){
+        p1.y=p1.y-5;
+    }  
+    if (p2.y>0 && p2up){
+        p2.y=p2.y-5;
     }
-    if(down && y<canvas.height-p1.height){
-        y=y+5;
+
+    if (p1.y<canvas.height-p1.height && p1down){
+        p1.y=p1.y+5;
+    }  
+    if (p2.y<canvas.height-p2.height && p2down){
+        p2.y=p2.y+5;
     }
-    p1.y=y
+
     p1.draw(ctx)
-    p2.y = p1.y;
     p2.draw(ctx)
+    socket.emit('playerMove', {'p1':p1.y, 'p2':p2.y});
     
     
 }
 
-var up = false;
-var down = false;
+var p1up,p2up = false;
+var p1down,p2down = false;
+
 
 window.onkeydown = function(e) {
-    var keyPr = e.code;
+    console.log(e.code)
     if (e.code == "ArrowUp"){ //upkey
-        up=true;
+        p2up=true;
     }
     if (e.code == "ArrowDown") {//downkey
-        down=true;
+        p2down=true;
+    }
+
+    if (e.code == "KeyW"){ //upkey
+        p1up=true;
+    }
+    if (e.code == "KeyS") {//downkey
+        p1down=true;
     }
 }
 window.onkeyup = function(e) {
     var keyPr = e.code;
     if (e.code == "ArrowUp") //upkey
-        up=false;
+        p2up=false;
     if (e.code == "ArrowDown") //downkey
-        down=false;
+        p2down=false;
+
+    if (e.code == "KeyW") //upkey
+        p1up=false;
+    if (e.code == "KeyS") //downkey
+        p1down=false;
 }
 
 
@@ -148,7 +167,6 @@ function clearcanvas(){
 function update(){
     clearcanvas();
     socket.emit('updateball');
-    socket.emit('playerMove', p1.y);
     move();
     ball.draw(ctx)
     requestAnimationFrame(update);
