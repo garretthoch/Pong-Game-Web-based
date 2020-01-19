@@ -49,7 +49,7 @@ class Pong:
                     ydir =self.paddlePhysics(self.yball,self.playerpos['player2'] ,ydir, self.paddleLength)
                     xdir =-1
                 else:#paddle missed ball
-                    self.score['p2']+=1
+                    self.score['p1']+=1
                     self.gameRunning=False
 
 
@@ -58,7 +58,7 @@ class Pong:
                     ydir =self.paddlePhysics(self.yball,self.playerpos['player1'] ,ydir, self.paddleLength)
                     xdir =1
                 else: #paddle missed ball
-                    self.score['p1']+=1
+                    self.score['p2']+=1
                     self.gameRunning=False
 
 
