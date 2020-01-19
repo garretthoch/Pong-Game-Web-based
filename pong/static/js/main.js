@@ -65,6 +65,7 @@ const ball = {
 
 };
 
+var gameStatus = false;
 
 function move(){
     if ( p1.y>0 && p1up){
@@ -147,13 +148,20 @@ socket.on('moveball',message =>{
 
 })
 
+socket.on('endGame', message =>{
+    document.querySelector('.test').innerHTML= message;
+    gameStatus=false
+})
+
 
 
 
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('start').onclick=function(){
+        gameStatus=true;
         socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
+        
         requestAnimationFrame(update);
     };
 });
@@ -165,10 +173,13 @@ function clearcanvas(){
 }
 
 function update(){
-    clearcanvas();
-    socket.emit('updateball');
-    move();
-    ball.draw(ctx)
-    requestAnimationFrame(update);
+
+    if (gameStatus){
+        clearcanvas();
+        socket.emit('updateball');
+        move();
+        ball.draw(ctx)
+        requestAnimationFrame(update);
+    }
     
 }
