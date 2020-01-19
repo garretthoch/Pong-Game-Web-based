@@ -4,6 +4,7 @@ class Pong:
 
     def __init__(self):
         self.playerpos={'player1':0, 'player2':0}
+        self.score= {'p1':0, 'p2':0}
         self.ballLen=10
         self.yball=0
         self.xball=0
@@ -36,8 +37,8 @@ class Pong:
         ydir = 1
         self.xball = round(width/2)
         self.yball = round(height/2)
-        xspeed =4
-        yspeed =4
+        xspeed =2
+        yspeed =2
         ballL=10
         self.gameRunning=True
         
@@ -48,6 +49,7 @@ class Pong:
                     ydir =self.paddlePhysics(self.yball,self.playerpos['player2'] ,ydir, self.paddleLength)
                     xdir =-1
                 else:#paddle missed ball
+                    self.score['p2']+=1
                     self.gameRunning=False
 
 
@@ -56,6 +58,7 @@ class Pong:
                     ydir =self.paddlePhysics(self.yball,self.playerpos['player1'] ,ydir, self.paddleLength)
                     xdir =1
                 else: #paddle missed ball
+                    self.score['p1']+=1
                     self.gameRunning=False
 
 
@@ -69,7 +72,7 @@ class Pong:
             
             self.xball = self.xball + (xdir*xspeed)
             self.yball = self.yball + (ydir*yspeed)
-            time.sleep(1/60)
+            time.sleep(1/120)
         
 
 

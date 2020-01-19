@@ -37,7 +37,7 @@ def updateball():
         emit('response', f"xball: {pong.xball} yball: {pong.yball} p1pos: {pong.playerpos['player2']} status {pong.gameRunning}")
     else:
         emit('moveball',{'x':pong.xball, 'y':pong.yball})
-        emit('endGame', "Game Over")
+        emit('endGame', pong.score)
         #endmessage= f"Player 1 lost... xball: {pong.xball} yball: {pong.yball} P1Pos {pong.playerpos['player1']}"
         #emit('response', endmessage)
 

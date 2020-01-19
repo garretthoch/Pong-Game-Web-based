@@ -1,8 +1,8 @@
-$gameHeight: 500;
-$gameWidth: 800;
+$gameHeight: 500px;
+$gameWidth: 800px;
 
 #pong{
-    background-color: pink;
+    background-color: black;
 }
 
 
@@ -12,12 +12,10 @@ $gameWidth: 800;
     border-style: solid;
     border-width: thick;
     margin-top: 50px;
-    margin-left: 300px;
-    margin-right: 300px;
     height: $gameHeight;
     width: $gameWidth;
-}
 
-.test{
-    color: white;
+    margin-left: auto;
+    margin-right: auto;
+
 }

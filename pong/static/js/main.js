@@ -4,6 +4,8 @@ var canvas = {width:w, height:h};
 var c = document.getElementById("pong");
 var ctx = c.getContext("2d");
 
+const gamepeicecolor= 'white'
+
 // Define player 1 object 
 const p1 = {
     x: 0,
@@ -11,7 +13,7 @@ const p1 = {
     height: 75,
     width: 15,
     draw: function(ctx){
-        ctx.fillStyle='black';
+        ctx.fillStyle=gamepeicecolor;
         ctx.fillRect(this.x,this.y,this.width,this.height);
     },
     initialize: function(param){
@@ -32,7 +34,7 @@ const p2 = {
     height: 75,
     width: 15,
     draw: function(ctx){
-        ctx.fillStyle='black';
+        ctx.fillStyle=gamepeicecolor;
         ctx.fillRect(this.x,this.y,this.width,this.height);
 
     },
@@ -52,7 +54,7 @@ const ball = {
     y: 0,
     length: 0,
     draw: function(ctx){
-        ctx.fillStyle='black';
+        ctx.fillStyle=gamepeicecolor;
         ctx.fillRect(this.x,this.y,this.length,this.length);   
 
     },
@@ -66,6 +68,7 @@ const ball = {
 };
 
 var gameStatus = false;
+var score = {'p1':0,'p2':0}
 
 function move(){
     if ( p1.y>0 && p1up){
@@ -146,12 +149,14 @@ socket.on('moveball',message =>{
     ball.x=message['x'];
     ball.y=message['y'];
 
-})
+});
 
 socket.on('endGame', message =>{
-    document.querySelector('.test').innerHTML= message;
+    score['p1'] = message['p1']
+    score['p2'] = message['p2']
+
     gameStatus=false
-})
+});
 
 
 
@@ -161,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('start').onclick=function(){
         gameStatus=true;
         socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
-        
+
         requestAnimationFrame(update);
     };
 });
@@ -169,7 +174,30 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 function clearcanvas(){
-    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
+function drawBackgroundObjects(ctx){
+    
+    //score boards
+    const x = (canvas.width / 4);
+    const y = (canvas.height / 4);
+    const s = 40;
+    
+    //ctx.clearRect(3*x,y,s, s)
+    ctx.fillStyle = gamepeicecolor;
+    ctx.font = "40px Bungee Inline";
+    const offset=ctx.measureText("0").width
+    ctx.fillText(score['p1'], x-offset, y );
+    ctx.fillText(score['p2'], (3*x)-offset, y );
+
+    //dividing line
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = gamepeicecolor;
+    ctx.setLineDash([20,20])
+    ctx.moveTo(canvas.width/2, 0);
+    ctx.lineTo(canvas.width/2, canvas.height);
+    ctx.stroke();
 }
 
 function update(){
@@ -177,9 +205,14 @@ function update(){
     if (gameStatus){
         clearcanvas();
         socket.emit('updateball');
+        drawBackgroundObjects(ctx)
         move();
         ball.draw(ctx)
         requestAnimationFrame(update);
+    }
+    else{
+        clearcanvas();
+        drawBackgroundObjects(ctx)
     }
     
 }
