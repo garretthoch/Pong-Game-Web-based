@@ -97,7 +97,6 @@ var p1down,p2down = false;
 
 
 window.onkeydown = function(e) {
-    console.log(e.code)
     if (e.code == "ArrowUp"){ //upkey
         p2up=true;
     }
@@ -164,13 +163,45 @@ socket.on('endGame', message =>{
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('start').onclick=function(){
-        gameStatus=true;
-        socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
-
+        
+        
+        document.getElementById('start').style.visibility='hidden'
+        countdown()
         requestAnimationFrame(update);
     };
 });
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
+async function countdown(){
+    //score boards
+    ctx.fillStyle = gamepeicecolor;
+    ctx.font = "40px Bungee Inline";
+    const x = (canvas.width / 2);
+    const y = (canvas.height / 2);
+    
+    
+   
+    for (var i = 3; i >0; i--){
+        const xoffset=(ctx.measureText(i).width)/2
+        ctx.clearRect(x-xoffset,y-40,2*xoffset,80)
+        ctx.fillText(i, x-xoffset, y );
+        await sleep(1000);
+
+    }
+    console.log(i)
+    if (i == 1){
+        gameStatus=true;
+        socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
+        requestAnimationFrame(update);
+    }
+
+    
+
+}
 
 
 function clearcanvas(){
@@ -201,18 +232,14 @@ function drawBackgroundObjects(ctx){
 }
 
 function update(){
-
+    console.log(gameStatus)
+    clearcanvas();
+    drawBackgroundObjects(ctx)
+    move();
+    ball.draw(ctx)
     if (gameStatus){
-        clearcanvas();
         socket.emit('updateball');
-        drawBackgroundObjects(ctx)
-        move();
-        ball.draw(ctx)
-        requestAnimationFrame(update);
+        
     }
-    else{
-        clearcanvas();
-        drawBackgroundObjects(ctx)
-    }
-    
+
 }

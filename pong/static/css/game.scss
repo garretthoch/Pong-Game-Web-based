@@ -1,9 +1,8 @@
 $gameHeight: 500px;
 $gameWidth: 800px;
 
-#pong{
-    background-color: black;
-}
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline&display=swap');
+$font: 'Bungee Inline', cursive;
 
 
 .gameArea{
@@ -17,5 +16,25 @@ $gameWidth: 800px;
 
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+
+}
+
+#pong{
+    background-color: black;
+    position: absolute;
+}
+#start{
+    position: absolute;
+    left: 325px;
+    bottom: 50%;
+
+    border-color: white;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+    font-family: $font;
+    text-align: center;
+    width: 150px;
 
 }

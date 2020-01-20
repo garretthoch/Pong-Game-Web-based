@@ -1,7 +1,4 @@
-#pong {
-  background-color: black;
-}
-
+@import url("https://fonts.googleapis.com/css?family=Bungee+Inline&display=swap");
 .gameArea {
   border-color: white;
   color: white;
@@ -12,5 +9,24 @@
   width: 800px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+}
+
+#pong {
+  background-color: black;
+  position: absolute;
+}
+
+#start {
+  position: absolute;
+  left: 325px;
+  bottom: 50%;
+  border-color: white;
+  background-color: black;
+  color: white;
+  border-radius: 3px;
+  font-family: "Bungee Inline", cursive;
+  text-align: center;
+  width: 150px;
 }
 /*# sourceMappingURL=game.css.map */
