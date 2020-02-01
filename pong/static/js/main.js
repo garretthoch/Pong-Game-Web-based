@@ -153,6 +153,8 @@ socket.on('moveball',message =>{
 socket.on('endGame', message =>{
     score['p1'] = message['p1']
     score['p2'] = message['p2']
+    
+    drawBackgroundObjects()
 
     gameStatus=false
 });
@@ -184,8 +186,13 @@ async function countdown(){
     //score boards
     var c2 = document.getElementById("countdown");
     var countctx = c2.getContext("2d");
-    countctx.fillStyle = gamepeicecolor;
-    countctx.font = "40px Bungee Inline";
+    countctx.fillStyle = 'white';
+    countctx.strokeStyle ='black';
+
+    countctx.font = "60px Bungee Inline";
+
+    countctx.lineWidth = 4;
+
     const x = (canvas.width / 2);
     const y = (canvas.height / 2);
     
@@ -193,7 +200,8 @@ async function countdown(){
    
     for (var i = 3; i >0; i--){
         countctx.clearRect(0,0,canvas.width,canvas.height);
-        const xoffset=(ctx.measureText(i).width)/2
+        const xoffset=(countctx.measureText(i).width)/2
+        countctx.strokeText(i, x-xoffset, y);
         countctx.fillText(i, x-xoffset, y );
         await sleep(1000);
 
@@ -214,10 +222,11 @@ function clearcanvas(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 }
 
-function drawBackgroundObjects(ctx){
+function drawBackgroundObjects(){
+    
     var c3 = document.getElementById("background");
     var backgroundctx = c3.getContext("2d");
-    
+    backgroundctx.clearRect(0,0,canvas.width,canvas.height);
     //score boards
     const x = (canvas.width / 4);
     const y = (canvas.height / 4);
@@ -231,20 +240,19 @@ function drawBackgroundObjects(ctx){
     backgroundctx.fillText(score['p2'], (3*x)-offset, y );
 
     //dividing line
-    backgroundctx.lineWidth = 8;
+    backgroundctx.lineWidth = 4;
     backgroundctx.strokeStyle = gamepeicecolor;
     backgroundctx.setLineDash([20,20])
     backgroundctx.moveTo(canvas.width/2, 0);
     backgroundctx.lineTo(canvas.width/2, canvas.height);
     backgroundctx.stroke();
+
 }
 
 function update(){
     console.log(gameStatus)
     clearcanvas();
-    
     move();
-    //ball.draw(ctx)
     if (gameStatus){
         socket.emit('updateball');
         ball.draw(ctx)
