@@ -68,9 +68,11 @@ const ball = {
 };
 
 var gameStatus = false;
+var gameState = "";
 var score = {'p1':0,'p2':0}
 
 function move(){
+
     if ( p1.y>0 && p1up){
         p1.y=p1.y-5;
     }  
@@ -84,6 +86,7 @@ function move(){
     if (p2.y<canvas.height-p2.height && p2down){
         p2.y=p2.y+5;
     }
+
 
     p1.draw(ctx)
     p2.draw(ctx)
@@ -109,6 +112,13 @@ window.onkeydown = function(e) {
     }
     if (e.code == "KeyS") {//downkey
         p1down=true;
+    }
+    console.log(gameState)
+    if (gameState == "EndRound" ){
+        gameState="running"
+        console.log("Round Reset")
+
+        startgame();
     }
 }
 window.onkeyup = function(e) {
@@ -150,9 +160,11 @@ socket.on('moveball',message =>{
 
 });
 
-socket.on('endGame', message =>{
-    score['p1'] = message['p1']
-    score['p2'] = message['p2']
+socket.on('endround', message =>{
+    score=message['score'];
+    score['p1'] = score['p1'];
+    score['p2'] = score['p2'];
+    gameState=message['status'];
     
     drawBackgroundObjects()
 
@@ -181,6 +193,11 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+function startgame(){
+    gameStatus=true;
+    socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
+    requestAnimationFrame(update);
+}
 
 async function countdown(){
     //score boards
@@ -208,9 +225,7 @@ async function countdown(){
     }
     if (i == 0){
         countctx.clearRect(0,0,canvas.width,canvas.height);
-        gameStatus=true;
-        socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
-        requestAnimationFrame(update);
+        startgame();
     }
 
 
@@ -250,7 +265,7 @@ function drawBackgroundObjects(){
 }
 
 function update(){
-    console.log(gameStatus)
+
     clearcanvas();
     move();
     if (gameStatus){
@@ -259,5 +274,6 @@ function update(){
         requestAnimationFrame(update);
         
     }
+    
 
 }

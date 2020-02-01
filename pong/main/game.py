@@ -35,9 +35,12 @@ def updateball():
     if pong.gameRunning:
         emit('moveball',{'x':pong.xball, 'y':pong.yball})
         emit('response', f"xball: {pong.xball} yball: {pong.yball} p1pos: {pong.playerpos['player2']} status {pong.gameRunning}")
+    elif (pong.score['p1'] == 10 or pong.score['p2']==10):
+        emit('moveball',{'x':pong.xball, 'y':pong.yball})
+        emit('endround',{'score':pong.score, 'status':'GameOver'})
     else:
         emit('moveball',{'x':pong.xball, 'y':pong.yball})
-        emit('endGame', pong.score)
+        emit('endround',{'score':pong.score, 'status':'EndRound'})
         #endmessage= f"Player 1 lost... xball: {pong.xball} yball: {pong.yball} P1Pos {pong.playerpos['player1']}"
         #emit('response', endmessage)
 
