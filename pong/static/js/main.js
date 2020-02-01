@@ -166,8 +166,12 @@ document.addEventListener("DOMContentLoaded", function(){
         
         
         document.getElementById('start').style.visibility='hidden'
-        countdown()
         requestAnimationFrame(update);
+        drawBackgroundObjects()
+        countdown()
+        //gameStatus=true;
+        //socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
+        
     };
 });
 
@@ -178,37 +182,41 @@ function sleep(ms) {
 
 async function countdown(){
     //score boards
-    ctx.fillStyle = gamepeicecolor;
-    ctx.font = "40px Bungee Inline";
+    var c2 = document.getElementById("countdown");
+    var countctx = c2.getContext("2d");
+    countctx.fillStyle = gamepeicecolor;
+    countctx.font = "40px Bungee Inline";
     const x = (canvas.width / 2);
     const y = (canvas.height / 2);
     
     
    
     for (var i = 3; i >0; i--){
+        countctx.clearRect(0,0,canvas.width,canvas.height);
         const xoffset=(ctx.measureText(i).width)/2
-        ctx.clearRect(x-xoffset,y-40,2*xoffset,80)
-        ctx.fillText(i, x-xoffset, y );
+        countctx.fillText(i, x-xoffset, y );
         await sleep(1000);
 
     }
-    console.log(i)
-    if (i == 1){
+    if (i == 0){
+        countctx.clearRect(0,0,canvas.width,canvas.height);
         gameStatus=true;
         socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
         requestAnimationFrame(update);
     }
 
+
     
 
 }
-
 
 function clearcanvas(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 }
 
 function drawBackgroundObjects(ctx){
+    var c3 = document.getElementById("background");
+    var backgroundctx = c3.getContext("2d");
     
     //score boards
     const x = (canvas.width / 4);
@@ -216,29 +224,31 @@ function drawBackgroundObjects(ctx){
     const s = 40;
     
     //ctx.clearRect(3*x,y,s, s)
-    ctx.fillStyle = gamepeicecolor;
-    ctx.font = "40px Bungee Inline";
-    const offset=ctx.measureText("0").width
-    ctx.fillText(score['p1'], x-offset, y );
-    ctx.fillText(score['p2'], (3*x)-offset, y );
+    backgroundctx.fillStyle = gamepeicecolor;
+    backgroundctx.font = "40px Bungee Inline";
+    const offset=backgroundctx.measureText("0").width
+    backgroundctx.fillText(score['p1'], x-offset, y );
+    backgroundctx.fillText(score['p2'], (3*x)-offset, y );
 
     //dividing line
-    ctx.lineWidth = 8;
-    ctx.strokeStyle = gamepeicecolor;
-    ctx.setLineDash([20,20])
-    ctx.moveTo(canvas.width/2, 0);
-    ctx.lineTo(canvas.width/2, canvas.height);
-    ctx.stroke();
+    backgroundctx.lineWidth = 8;
+    backgroundctx.strokeStyle = gamepeicecolor;
+    backgroundctx.setLineDash([20,20])
+    backgroundctx.moveTo(canvas.width/2, 0);
+    backgroundctx.lineTo(canvas.width/2, canvas.height);
+    backgroundctx.stroke();
 }
 
 function update(){
     console.log(gameStatus)
     clearcanvas();
-    drawBackgroundObjects(ctx)
+    
     move();
-    ball.draw(ctx)
+    //ball.draw(ctx)
     if (gameStatus){
         socket.emit('updateball');
+        ball.draw(ctx)
+        requestAnimationFrame(update);
         
     }
 

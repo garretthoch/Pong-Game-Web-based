@@ -20,9 +20,14 @@ $font: 'Bungee Inline', cursive;
 
 }
 
+.gameArea > canvas{
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
 #pong{
     background-color: black;
-    position: absolute;
 }
 #start{
     position: absolute;
@@ -37,4 +42,8 @@ $font: 'Bungee Inline', cursive;
     text-align: center;
     width: 150px;
 
+}
+
+.test{
+    color: white;
 }

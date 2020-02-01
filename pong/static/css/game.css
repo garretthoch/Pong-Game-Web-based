@@ -12,9 +12,14 @@
   position: relative;
 }
 
+.gameArea > canvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 #pong {
   background-color: black;
-  position: absolute;
 }
 
 #start {
@@ -28,5 +33,9 @@
   font-family: "Bungee Inline", cursive;
   text-align: center;
   width: 150px;
+}
+
+.test {
+  color: white;
 }
 /*# sourceMappingURL=game.css.map */
