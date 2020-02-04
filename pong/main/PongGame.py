@@ -41,6 +41,7 @@ class Pong:
         yspeed =2
         ballL=10
         self.gameRunning=True
+        self.gameStatus="Running"
         
 
         while(self.gameRunning):
@@ -51,6 +52,11 @@ class Pong:
                 else:#paddle missed ball
                     self.score['p1']+=1
                     self.gameRunning=False
+                    if self.score['p1'] < 2:
+                        self.gameStatus="EndRound"
+                    else:
+                        self.gameStatus="GameOver"
+
 
 
             if (self.xball < self.paddleWidth+self.paddleoffset): #ball at left paddle
@@ -60,6 +66,10 @@ class Pong:
                 else: #paddle missed ball
                     self.score['p2']+=1
                     self.gameRunning=False
+                    if self.score['p2'] < 2:
+                        self.gameStatus="EndRound"
+                    else:
+                        self.gameStatus="GameOver"
 
 
             if self.yball >= (height-ballL): #ball hit bottom of game area

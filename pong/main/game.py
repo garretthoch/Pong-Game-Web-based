@@ -29,20 +29,20 @@ def startgame(message):
     height= message['height']
     width=message['width']
     pong.startgame(height,width)
+    emit('status',pong.gameStatus)
 
 @socketio.on('updateball')
 def updateball():
-    if pong.gameRunning:
+    if pong.gameStatus=="Running":
         emit('moveball',{'x':pong.xball, 'y':pong.yball})
-        emit('response', f"xball: {pong.xball} yball: {pong.yball} p1pos: {pong.playerpos['player2']} status {pong.gameRunning}")
-    elif (pong.score['p1'] == 10 or pong.score['p2']==10):
-        emit('moveball',{'x':pong.xball, 'y':pong.yball})
-        emit('endround',{'score':pong.score, 'status':'GameOver'})
+        emit('status',pong.gameStatus)
+        emit('response', f"xball: {pong.xball} yball: {pong.yball} p1pos: {pong.playerpos['player2']} status; {pong.status}")
+
     else:
         emit('moveball',{'x':pong.xball, 'y':pong.yball})
-        emit('endround',{'score':pong.score, 'status':'EndRound'})
-        #endmessage= f"Player 1 lost... xball: {pong.xball} yball: {pong.yball} P1Pos {pong.playerpos['player1']}"
-        #emit('response', endmessage)
+        emit('status',pong.gameStatus)
+        emit('score',pong.score)
+
 
 @socketio.on('playerMove')
 def updatePlayer(message):

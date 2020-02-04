@@ -67,8 +67,7 @@ const ball = {
 
 };
 
-var gameStatus = false;
-var gameState = "";
+var gameStatus = ""
 var score = {'p1':0,'p2':0}
 
 function move(){
@@ -113,13 +112,7 @@ window.onkeydown = function(e) {
     if (e.code == "KeyS") {//downkey
         p1down=true;
     }
-    console.log(gameState)
-    if (gameState == "EndRound" ){
-        gameState="running"
-        console.log("Round Reset")
 
-        startgame();
-    }
 }
 window.onkeyup = function(e) {
     var keyPr = e.code;
@@ -160,16 +153,14 @@ socket.on('moveball',message =>{
 
 });
 
-socket.on('endround', message =>{
-    score=message['score'];
-    score['p1'] = score['p1'];
-    score['p2'] = score['p2'];
-    gameState=message['status'];
-    
-    drawBackgroundObjects()
-
-    gameStatus=false
+socket.on('score', message =>{
+    score['p1'] = message['p1'];
+    score['p2'] = message['p2'];
 });
+
+socket.on('status', status=>{
+    gameStatus = status
+})
 
 
 
@@ -194,7 +185,6 @@ function sleep(ms) {
   }
 
 function startgame(){
-    gameStatus=true;
     socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
     requestAnimationFrame(update);
 }
@@ -264,16 +254,57 @@ function drawBackgroundObjects(){
 
 }
 
-function update(){
 
-    clearcanvas();
-    move();
-    if (gameStatus){
+
+function checkstatus(){
+
+    console.log(gameStatus)
+    if (gameStatus =="Running"){
         socket.emit('updateball');
         ball.draw(ctx)
         requestAnimationFrame(update);
         
     }
+
+    /*else if (gameStatus =="EndRound"){
+        ball.x = canvas.width/2;
+        ball.y = canvas.height/2;
+        drawBackgroundObjects();
+
+        // wait for both players to ready up by moving thier paddle
+        var p1status=false
+        var p2status = false
+        while(!p1status && !p2status){
+            if (p1up || p1down){
+                p1status=true;
+            }
+            if (p2up || p2down){
+                p2status=true;
+            }
+        }
+        startgame();
+
+    }
+    else if (gameStatus =="GameOver"){
+        //display game over and have two buttons. One for playagain another for mode selection
+        
+
+    }
+    else{
+        console.log("ERROR: unknown game status")
+        console.log(gameStatus)
+        requestAnimationFrame(update);
+
+    }
+    */
+}
+
+
+function update(){
+
+    clearcanvas();
+    move();
+    checkstatus();
     
 
 }
