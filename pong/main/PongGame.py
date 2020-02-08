@@ -8,10 +8,10 @@ class Pong:
         self.ballLen=10
         self.yball=0
         self.xball=0
-        self.gameRunning=False
         self.paddleLength = 75
         self.paddleWidth = 15
         self.paddleoffset= 10
+        self.gameStatus="Initialized"
 
     def updateplayerpos(self,player,y):
         self.playerpos[player]=y
@@ -40,18 +40,17 @@ class Pong:
         xspeed =2
         yspeed =2
         ballL=10
-        self.gameRunning=True
         self.gameStatus="Running"
         
+        
 
-        while(self.gameRunning):
+        while(self.gameStatus == "Running"):
             if self.xball > (width-ballL-self.paddleWidth-self.paddleoffset): #ball at right paddle
                 if(self.playerpos['player2']<= self.yball <= self.playerpos['player2']+self.paddleLength):#ball hit paddle on left side
                     ydir =self.paddlePhysics(self.yball,self.playerpos['player2'] ,ydir, self.paddleLength)
                     xdir =-1
                 else:#paddle missed ball
                     self.score['p1']+=1
-                    self.gameRunning=False
                     if self.score['p1'] < 2:
                         self.gameStatus="EndRound"
                     else:
@@ -65,7 +64,6 @@ class Pong:
                     xdir =1
                 else: #paddle missed ball
                     self.score['p2']+=1
-                    self.gameRunning=False
                     if self.score['p2'] < 2:
                         self.gameStatus="EndRound"
                     else:

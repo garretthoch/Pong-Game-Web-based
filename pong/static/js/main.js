@@ -257,20 +257,18 @@ function drawBackgroundObjects(){
 
 
 function checkstatus(){
-
     console.log(gameStatus)
     if (gameStatus =="Running"){
         socket.emit('updateball');
         ball.draw(ctx)
-        requestAnimationFrame(update);
-        
+          
     }
-
-    /*else if (gameStatus =="EndRound"){
+    else if (gameStatus =="EndRound"){
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
         drawBackgroundObjects();
 
+        //console.log("End Round")
         // wait for both players to ready up by moving thier paddle
         var p1status=false
         var p2status = false
@@ -285,15 +283,19 @@ function checkstatus(){
         startgame();
 
     }
+    /*
     else if (gameStatus =="GameOver"){
         //display game over and have two buttons. One for playagain another for mode selection
+        //console.log("GameOver")
         
 
     }
+    else if (gameStatus =="Initialized"){
+        //requestAnimationFrame(update);
+        //console.log("initialized")
+    }
     else{
-        console.log("ERROR: unknown game status")
-        console.log(gameStatus)
-        requestAnimationFrame(update);
+        //console.log("ERROR: unknown game status")
 
     }
     */
@@ -301,10 +303,10 @@ function checkstatus(){
 
 
 function update(){
-
     clearcanvas();
     move();
     checkstatus();
+    requestAnimationFrame(update);
     
 
 }

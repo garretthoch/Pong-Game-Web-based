@@ -17,3 +17,4 @@ def login():
 @main.route('/logout')
 def logout():
     print("hello world")
+

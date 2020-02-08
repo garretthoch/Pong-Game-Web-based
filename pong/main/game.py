@@ -28,19 +28,20 @@ def startgame(message):
     #emit('response', "Running...")
     height= message['height']
     width=message['width']
-    pong.startgame(height,width)
+    pong.gameStatus = "Running"
     emit('status',pong.gameStatus)
+    pong.startgame(height,width)
+
+
+    
 
 @socketio.on('updateball')
 def updateball():
+    emit('moveball',{'x':pong.xball, 'y':pong.yball})
+    emit('status',pong.gameStatus)
     if pong.gameStatus=="Running":
-        emit('moveball',{'x':pong.xball, 'y':pong.yball})
-        emit('status',pong.gameStatus)
-        emit('response', f"xball: {pong.xball} yball: {pong.yball} p1pos: {pong.playerpos['player2']} status; {pong.status}")
-
+        emit('response', f"xball: {pong.xball} yball: {pong.yball} p1pos: {pong.playerpos['player2']} status; {pong.gameStatus}")
     else:
-        emit('moveball',{'x':pong.xball, 'y':pong.yball})
-        emit('status',pong.gameStatus)
         emit('score',pong.score)
 
 
@@ -57,4 +58,5 @@ def setup(message):
     p2dict = {'width':pong.paddleWidth, 'length':pong.paddleLength,'x':width-pong.paddleoffset-pong.paddleWidth, 'y':round(height/2-pong.paddleLength/2)}
     bdict = {'length':pong.ballLen, 'x':width/2, 'y':height/2}
     emit('parameters', {'paddle1':p1dict, 'paddle2':p2dict,'ball':bdict})
+    emit('status',pong.gameStatus)
 
