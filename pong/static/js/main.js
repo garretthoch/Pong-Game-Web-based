@@ -156,6 +156,7 @@ socket.on('moveball',message =>{
 socket.on('score', message =>{
     score['p1'] = message['p1'];
     score['p2'] = message['p2'];
+    drawBackgroundObjects()
 });
 
 socket.on('status', status=>{
@@ -174,8 +175,7 @@ document.addEventListener("DOMContentLoaded", function(){
         requestAnimationFrame(update);
         drawBackgroundObjects()
         countdown()
-        //gameStatus=true;
-        //socket.emit('startgame',{'height':canvas.height,'width':canvas.width});
+
         
     };
 });
@@ -213,10 +213,10 @@ async function countdown(){
         await sleep(1000);
 
     }
-    if (i == 0){
-        countctx.clearRect(0,0,canvas.width,canvas.height);
-        startgame();
-    }
+
+    countctx.clearRect(0,0,canvas.width,canvas.height);
+    startgame();
+
 
 
     
@@ -255,50 +255,49 @@ function drawBackgroundObjects(){
 }
 
 
+var p1status=false
+var p2status = false
 
 function checkstatus(){
-    console.log(gameStatus)
     if (gameStatus =="Running"){
         socket.emit('updateball');
         ball.draw(ctx)
+        
           
     }
     else if (gameStatus =="EndRound"){
+        console.log("HERE")
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
-        drawBackgroundObjects();
 
-        //console.log("End Round")
         // wait for both players to ready up by moving thier paddle
-        var p1status=false
-        var p2status = false
-        while(!p1status && !p2status){
-            if (p1up || p1down){
-                p1status=true;
-            }
-            if (p2up || p2down){
-                p2status=true;
-            }
-        }
-        startgame();
+        
+        
 
-    }
-    /*
-    else if (gameStatus =="GameOver"){
-        //display game over and have two buttons. One for playagain another for mode selection
-        //console.log("GameOver")
+        if (p1up || p1down){
+                p1status=true;
+        }
+        if (p2up || p2down){
+                p2status=true;
+        }
+        
+        if (p1status && p2status){
+
+            startgame();
+            p1status=false
+            p2status = false
+        }
         
 
     }
+    
     else if (gameStatus =="Initialized"){
-        //requestAnimationFrame(update);
-        //console.log("initialized")
+        //idk
     }
     else{
         //console.log("ERROR: unknown game status")
 
     }
-    */
 }
 
 
@@ -308,5 +307,4 @@ function update(){
     checkstatus();
     requestAnimationFrame(update);
     
-
 }

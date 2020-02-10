@@ -40,21 +40,20 @@ class Pong:
         xspeed =2
         yspeed =2
         ballL=10
-        self.gameStatus="Running"
+       
+       
+
         
         
 
-        while(self.gameStatus == "Running"):
+        while(True):
             if self.xball > (width-ballL-self.paddleWidth-self.paddleoffset): #ball at right paddle
                 if(self.playerpos['player2']<= self.yball <= self.playerpos['player2']+self.paddleLength):#ball hit paddle on left side
                     ydir =self.paddlePhysics(self.yball,self.playerpos['player2'] ,ydir, self.paddleLength)
                     xdir =-1
                 else:#paddle missed ball
                     self.score['p1']+=1
-                    if self.score['p1'] < 2:
-                        self.gameStatus="EndRound"
-                    else:
-                        self.gameStatus="GameOver"
+                    break
 
 
 
@@ -64,10 +63,7 @@ class Pong:
                     xdir =1
                 else: #paddle missed ball
                     self.score['p2']+=1
-                    if self.score['p2'] < 2:
-                        self.gameStatus="EndRound"
-                    else:
-                        self.gameStatus="GameOver"
+                    break
 
 
             if self.yball >= (height-ballL): #ball hit bottom of game area
