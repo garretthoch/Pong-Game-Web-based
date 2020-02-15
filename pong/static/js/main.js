@@ -266,7 +266,6 @@ function checkstatus(){
           
     }
     else if (gameStatus =="EndRound"){
-        console.log("HERE")
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
 
@@ -286,19 +285,27 @@ function checkstatus(){
             startgame();
             p1status=false
             p2status = false
-
-            while(true){
-                if (gameStatus == Running){
-                    break
-                }
-                console.log(loop)
-            }
         }
         
 
     }
     else if (gameStatus =="Initialized"){
         //idk
+    }
+    else if (gameStatus =="GameOver"){
+        //display results
+        var p = ""
+        var prompt=document.getElementById("prompt")
+        if (score['p1'] > score['p2']){
+            p = 'Player 1';
+        }
+        else{
+            p = 'Player 2';
+        }
+        var s = `Game Over... ${p} Wins!`
+        prompt.innerText = s
+        // kill loop
+        //create buttons for new game, game mode selection
     }
     else{
         //console.log("ERROR: unknown game status")
@@ -311,6 +318,8 @@ function update(){
     clearcanvas();
     move();
     checkstatus();
-    requestAnimationFrame(update);
+    if (gameStatus != "GameOver"){
+        requestAnimationFrame(update);
+    }
     
 }

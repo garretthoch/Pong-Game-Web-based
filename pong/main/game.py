@@ -32,10 +32,12 @@ def startgame(message):
     emit('status',pong.gameStatus)
     
     pong.startgame(height,width)
+    if ((pong.score["p1"] or pong.score["p2"]) == 2):
+        pong.gameStatus = "GameOver"
+    else:
+        pong.gameStatus = "EndRound"
     
-    pong.gameStatus = "EndRound"
     emit('status',pong.gameStatus)
-
     emit('score',pong.score)
 
 

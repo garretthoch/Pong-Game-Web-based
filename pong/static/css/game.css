@@ -35,7 +35,10 @@
   width: 150px;
 }
 
-.test {
+#prompt {
+  position: absolute;
+  left: 325px;
+  bottom: 50%;
   color: white;
 }
 /*# sourceMappingURL=game.css.map */

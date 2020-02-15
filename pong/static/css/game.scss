@@ -46,6 +46,10 @@ $font: 'Bungee Inline', cursive;
 }
 
 
-.test{
+#prompt{
+    position: absolute;
+    left: 325px;
+    bottom: 50%;
+
     color: white;
 }
