@@ -286,11 +286,17 @@ function checkstatus(){
             startgame();
             p1status=false
             p2status = false
+
+            while(true){
+                if (gameStatus == Running){
+                    break
+                }
+                console.log(loop)
+            }
         }
         
 
     }
-    
     else if (gameStatus =="Initialized"){
         //idk
     }
