@@ -10,6 +10,16 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 3fr 1fr;
+      grid-template-columns: 1fr 3fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  justify-items: center;
+  -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .gameArea > canvas {
@@ -18,14 +28,40 @@
   right: 0;
 }
 
-#pong {
-  background-color: black;
+#gameMenu {
+  background-color: blue;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
 }
 
-#start {
-  position: absolute;
-  left: 325px;
-  bottom: 50%;
+#endMenu {
+  visibility: hidden;
+}
+
+#endMenu > h2 {
+  font-family: "Bungee Inline", cursive;
+  color: white;
+  background-color: red;
+}
+
+#startMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: pink;
+}
+
+.gameButton {
   border-color: white;
   background-color: black;
   color: white;
@@ -33,12 +69,11 @@
   font-family: "Bungee Inline", cursive;
   text-align: center;
   width: 150px;
+  position: relative;
 }
 
-#prompt {
-  position: absolute;
-  left: 325px;
-  bottom: 50%;
-  color: white;
+.gameButton:hover {
+  background-color: white;
+  color: black;
 }
 /*# sourceMappingURL=game.css.map */

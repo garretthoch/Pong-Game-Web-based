@@ -14,8 +14,17 @@
         <canvas id="pong" width="800" height="500"></canvas>
         <canvas id="background" width="800" height="500"></canvas>
         <canvas id="countdown" width="800" height="500"></canvas>
-        <button id="start" class="navBarButton">Start game</button>
-        <h2 id="prompt"></h2>
+        <div id="gameMenu">
+            <div id="startMenu">
+                <button id="start" class="gameButton">Start game</button>
+            </div>
+            <div id ="endMenu">
+                <h2>Game Over</h2>
+                <h2 id="prompt"></h2>
+                <button id="newGame" class="gameButton">New Game?</button>
+                <button id="modeSelection" class="gameButton">Game Mode</button>
+            </div>
+        </div>
     </div>
 
     

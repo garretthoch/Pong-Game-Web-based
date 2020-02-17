@@ -302,8 +302,9 @@ function checkstatus(){
         else{
             p = 'Player 2';
         }
-        var s = `Game Over... ${p} Wins!`
+        var s = `${p} Wins!`
         prompt.innerText = s
+        document.getElementById('endMenu').style.display='inline'
         // kill loop
         //create buttons for new game, game mode selection
     }
