@@ -29,23 +29,32 @@
 }
 
 #gameMenu {
-  background-color: blue;
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
   grid-column: 2/3;
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2/3;
+  background-color: black;
 }
 
 #endMenu {
   visibility: hidden;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
 }
 
 #endMenu > h2 {
   font-family: "Bungee Inline", cursive;
   color: white;
-  background-color: red;
+  background-color: black;
+  margin: 0px;
+  padding: 0px;
 }
 
 #startMenu {
@@ -58,7 +67,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: pink;
+  background-color: black;
 }
 
 .gameButton {
@@ -70,6 +79,7 @@
   text-align: center;
   width: 150px;
   position: relative;
+  margin: 20px;
 }
 
 .gameButton:hover {

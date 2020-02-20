@@ -36,27 +36,33 @@ $font: 'Bungee Inline', cursive;
 }
 
 #gameMenu{
-    background-color: blue;
     grid-column: 2/3;
     grid-row: 2/3;
+    background-color: black;
 
 
 }
 
 #endMenu{
     visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 #endMenu > h2{
     font-family: $font;
     color: white;
-    background-color: red;
+    background-color:black;
+    margin: 0px;
+    padding: 0px;
+
 }
 
 #startMenu{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: pink;
+    background-color:black;
 
 }
 
@@ -70,6 +76,7 @@ $font: 'Bungee Inline', cursive;
     text-align: center;
     width: 150px;
     position: relative;
+    margin: 20px;
 }
 
 .gameButton:hover{

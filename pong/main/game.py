@@ -67,3 +67,6 @@ def setup(message):
     bdict = {'length':pong.ballLen, 'x':width/2, 'y':height/2}
     emit('parameters', {'paddle1':p1dict, 'paddle2':p2dict,'ball':bdict})
 
+@socketio.on('newGame')
+def newGame():
+    pong.newGame()

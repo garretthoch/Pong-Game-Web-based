@@ -1,4 +1,5 @@
 import time
+import random
 
 class Pong:
 
@@ -33,8 +34,10 @@ class Pong:
         return ydir
 
     def startgame(self,height,width):
-        xdir = 1
-        ydir = 1
+        
+        
+        xdir = (1 if random.random() < .5 else -1)
+        ydir = (1 if random.random() < .5 else -1)
         self.xball = round(width/2)
         self.yball = round(height/2)
         xspeed =2
@@ -77,7 +80,10 @@ class Pong:
             self.xball = self.xball + (xdir*xspeed)
             self.yball = self.yball + (ydir*yspeed)
             time.sleep(1/120)
-        
+    
+    def newGame(self):
+        self.score= {'p1':0, 'p2':0}
+
 
 
             

@@ -180,6 +180,17 @@ document.addEventListener("DOMContentLoaded", function(){
     };
 });
 
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById('newGame').onclick=function(){
+        socket.emit('newGame');
+        document.getElementById('endMenu').style.visibility='hidden'
+        document.getElementById('start').style.visibility='visible'  
+        gameStatus="Initialized"
+              
+    };
+});
+
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -294,7 +305,7 @@ function checkstatus(){
     }
     else if (gameStatus =="GameOver"){
         //display results
-        var p = ""
+        var p = "";
         var prompt=document.getElementById("prompt")
         if (score['p1'] > score['p2']){
             p = 'Player 1';
@@ -302,9 +313,10 @@ function checkstatus(){
         else{
             p = 'Player 2';
         }
-        var s = `${p} Wins!`
-        prompt.innerText = s
-        document.getElementById('endMenu').style.display='inline'
+        var s = `${p} Wins!`;
+        prompt.innerText = s;
+        document.getElementById('endMenu').style.visibility="visible";
+        console.log(s);
         // kill loop
         //create buttons for new game, game mode selection
     }
